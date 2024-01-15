@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link {
+  @apply p-2.5 flex rounded-md gap-6 items-center md:cursor-pointer cursor-default duration-300 font-medium hover:bg-green-100 hover:text-green-600;
+}
+
+.active {
+  @apply bg-green-100 text-green-600;
+}
