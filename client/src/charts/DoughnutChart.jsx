@@ -8,11 +8,12 @@ const DoughnutChart = () => {
     datasets: [
       {
         label: "Current Status",
-        data: [6, 3, 1],
+        data: [6, 2, 1, 1],
         backgroundColor: [
           "rgba(255, 99, 132)",
           "rgba(54, 162, 235)",
           "rgba(255, 206, 86)",
+          "rgba(255, 68, 51)",
         ],
       },
     ],

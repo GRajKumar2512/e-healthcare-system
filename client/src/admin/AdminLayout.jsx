@@ -28,6 +28,7 @@ const AdminLayout = () => {
       </nav>
       <div className="flex">
         <Sidebar />
+
         <main className="flex-1 mx-auto bg-green-50 px-5">
           <Outlet />
         </main>

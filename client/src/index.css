@@ -9,3 +9,22 @@
 .active {
   @apply bg-green-100 text-green-600;
 }
+
+.input_div {
+  @apply w-full p-2 rounded-md outline-none border;
+}
+
+table {
+  @apply border border-gray-300 mx-auto;
+}
+
+thead {
+  @apply bg-green-100;
+}
+th {
+  @apply font-semibold text-gray-700 px-5 border border-gray-300 min-w-max;
+}
+
+td {
+  @apply font-normal text-slate-700 px-5 border border-gray-300 min-w-max;
+}

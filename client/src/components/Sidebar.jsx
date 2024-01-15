@@ -40,12 +40,12 @@ const Sidebar = () => {
     {
       name: "Nurses",
       icon: LiaUserNurseSolid,
-      menus: ["Nurse Form", "Nurse Action"],
+      menus: ["Add Nurse", "Nurse Action"],
     },
     {
       name: "Patients",
       icon: PiUsersThree,
-      menus: ["Patient Form", "Patient Action"],
+      menus: ["Add Patient", "Patient Action"],
     },
   ];
 
@@ -54,7 +54,7 @@ const Sidebar = () => {
       <motion.div
         variants={sidebar_animation_obj}
         animate={isOpen ? "open" : "closed"}
-        className="w-[16rem] max-w-[16rem] z-[999] bg-white shadow-xl text-gray h-screen overflow-hidden md:relative fixed"
+        className="w-[16rem] max-w-[16rem] z-[999] bg-white shadow-xl text-gray h-screen overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100 md:relative fixed"
       >
         {/* control button */}
         <motion.div
@@ -67,7 +67,7 @@ const Sidebar = () => {
 
         {/* menu items */}
         <div className="flex flex-col h-full mt-2">
-          <ul className="whitespace-pre px-2.5 py-5 text-[0.9rem] flex flex-col gap-1 font-medium overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100">
+          <ul className="whitespace-pre px-2.5 py-5 text-[0.9rem] flex flex-col gap-1 font-medium overflow-x-hidden overflow-y-auto ">
             <li>
               <NavLink to={"/"} className="link">
                 <AiOutlineAppstore size={23} className="min-w-max" />

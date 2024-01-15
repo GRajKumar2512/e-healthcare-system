@@ -1,7 +1,5 @@
-import React from "react";
-
 const BookingsAll = () => {
-  return <div>BookingsAll</div>;
+  return <div></div>;
 };
 
 export default BookingsAll;
