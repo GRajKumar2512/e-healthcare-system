@@ -15,16 +15,22 @@
 }
 
 table {
-  @apply border border-gray-300 mx-auto;
+  @apply w-full;
 }
 
 thead {
   @apply bg-green-100;
 }
+
 th {
-  @apply font-semibold text-gray-700 px-5 border border-gray-300 min-w-max;
+  @apply font-semibold text-gray-700 px-5 py-4 min-w-max whitespace-nowrap;
 }
 
 td {
-  @apply font-normal text-slate-700 px-5 border border-gray-300 min-w-max;
+  @apply font-normal text-slate-700 px-5 py-4 min-w-max whitespace-nowrap;
+}
+
+#container:hover #icon-container #icon {
+  transform: rotateY(180deg);
+  transition: transfrom 0.5s ease;
 }

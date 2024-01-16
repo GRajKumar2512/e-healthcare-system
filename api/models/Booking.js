@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const BookingSchema = new Schema({
-  name: { type: String, required: true },
   contact: { type: String, required: true },
   address: { type: String, required: true },
   ailmentReason: { type: String, required: true },

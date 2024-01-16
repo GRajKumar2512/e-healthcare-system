@@ -3,6 +3,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import Table from "../../../tables/Table";
 import { useQuery } from "@tanstack/react-query";
 import { DNA } from "react-loader-spinner";
+import { useState } from "react";
 
 const NurseActions = () => {
   // const [selectedNurse, setSelectedNurse] = useState(null);
@@ -19,6 +20,8 @@ const NurseActions = () => {
       return data;
     },
   });
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const columnHelper = createColumnHelper();
 
@@ -97,7 +100,54 @@ const NurseActions = () => {
   }
 
   return (
-    <div className="lg:w-[70%] md:w-[80%] p-4 mx-auto bg-white rounded-lg shadow-lg mt-20">
+    <div className="mx-auto bg-white rounded-lg shadow-lg mt-20">
+      <div className="p-5 flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-green-950">Nurses</h1>
+        <button
+          className="px-3 py-3 rounded-lg shadow-lg text-white bg-green-950"
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+        >
+          Filters
+        </button>
+      </div>
+      <div className="border-t" />
+      {isFilterOpen && (
+        <div className="p-4">
+          <div className="flex gap-5 items-center justify-between p-5 ">
+            <div className="w-full">
+              <label>Name:</label>
+              <input
+                type="text"
+                name="name"
+                className="w-full p-4 mt-4 border rounded-lg outline-green-500"
+                placeholder="First Name"
+              />
+            </div>
+            <div className="w-full">
+              <label>Address:</label>
+              <input
+                type="text"
+                name="address"
+                className="w-full p-4 mt-4 border rounded-lg outline-green-500"
+                placeholder="Address"
+              />
+            </div>
+            <div className="w-full">
+              <label>Department:</label>
+              <input
+                type="text"
+                name="department"
+                className="w-full p-4 mt-4 border rounded-lg outline-green-500"
+                placeholder="Department"
+              />
+            </div>
+          </div>
+
+          <button className="ml-5 p-4 rounded-lg shadow-lg text-white bg-green-950">
+            Submit
+          </button>
+        </div>
+      )}
       <Table data={nurses} columns={columns} />
     </div>
   );

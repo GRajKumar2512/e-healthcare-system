@@ -14,7 +14,7 @@ const AdminLayout = () => {
 
   return (
     <>
-      <nav className="flex justify-between px-8 py-4 items-center shadow-xl">
+      <nav className="flex justify-between px-8 py-4 items-center shadow-lg">
         <div>
           <h1 className="text-2xl font-semibold text-gray-500 tracking-widest">
             Heathcare

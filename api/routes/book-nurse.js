@@ -30,7 +30,6 @@ router.get("/nurse/:id", async (req, res) => {
 // send mail to the nurse email id
 router.post("/", async (req, res) => {
   const {
-    name,
     contact,
     address,
     ailmentReason,
@@ -43,7 +42,6 @@ router.post("/", async (req, res) => {
 
   try {
     const createdBooking = new Booking({
-      name,
       contact,
       address,
       ailmentReason,
@@ -66,6 +64,16 @@ router.post("/", async (req, res) => {
     await sendBookingConfirmationEmail(nurseEmail);
 
     res.status(200).json(createdBooking);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const allBookings = await Booking.find({}).populate(["nurse", "patient"]);
+
+    res.status(200).json(allBookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
