@@ -6,8 +6,10 @@ import {
 } from "@tanstack/react-table";
 import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FaSortAmountUp } from "react-icons/fa";
+import { useState } from "react";
+import UpdateModal from "../components/UpdateModal";
 
-const Table = ({ data, columns }) => {
+const Table = ({ data, columns, inputs }) => {
   const table = useReactTable({
     data,
     columns,
@@ -15,8 +17,12 @@ const Table = ({ data, columns }) => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const [open, setOpen] = useState(false);
+  const [rowDetails, setRowDetails] = useState({});
+
   const handleRowClick = (row) => {
-    console.log(row.original);
+    setRowDetails(row.original);
+    setOpen(true);
   };
 
   return (
@@ -62,7 +68,11 @@ const Table = ({ data, columns }) => {
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className={`${row.id % 2 === 0 ? "bg-green-50" : "bg-white"}`}
+              className={`${
+                row.id % 2 === 0
+                  ? "bg-green-50 cursor-pointer"
+                  : "bg-white cursor-pointer"
+              }`}
               onClick={() => handleRowClick(row)}
             >
               {row.getVisibleCells().map((cell) => (
@@ -74,6 +84,11 @@ const Table = ({ data, columns }) => {
           ))}
         </tbody>
       </table>
+      <UpdateModal
+        open={open}
+        onClose={() => setOpen(!open)}
+        details={rowDetails}
+      />
     </div>
   );
 };

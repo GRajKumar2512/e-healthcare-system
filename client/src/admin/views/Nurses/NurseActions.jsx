@@ -4,11 +4,9 @@ import Table from "../../../tables/Table";
 import { useQuery } from "@tanstack/react-query";
 import { DNA } from "react-loader-spinner";
 import { useState } from "react";
+import { DebounceInput } from "react-debounce-input";
 
 const NurseActions = () => {
-  // const [selectedNurse, setSelectedNurse] = useState(null);
-  // const [isOpen, setIsOpen] = useState(false);
-
   const {
     data: nurses,
     isLoading,
@@ -22,6 +20,10 @@ const NurseActions = () => {
   });
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [department, setDepartment] = useState("");
 
   const columnHelper = createColumnHelper();
 
@@ -116,7 +118,9 @@ const NurseActions = () => {
           <div className="flex gap-5 items-center justify-between p-5 ">
             <div className="w-full">
               <label>Name:</label>
-              <input
+              <DebounceInput
+                debounceTimeout={500}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 name="name"
                 className="w-full p-4 mt-4 border rounded-lg outline-green-500"
@@ -125,7 +129,9 @@ const NurseActions = () => {
             </div>
             <div className="w-full">
               <label>Address:</label>
-              <input
+              <DebounceInput
+                debounceTimeout={500}
+                onChange={(e) => setAddress(e.target.value)}
                 type="text"
                 name="address"
                 className="w-full p-4 mt-4 border rounded-lg outline-green-500"
@@ -134,7 +140,9 @@ const NurseActions = () => {
             </div>
             <div className="w-full">
               <label>Department:</label>
-              <input
+              <DebounceInput
+                debounceTimeout={500}
+                onChange={(e) => setDepartment(e.target.value)}
                 type="text"
                 name="department"
                 className="w-full p-4 mt-4 border rounded-lg outline-green-500"
@@ -148,7 +156,11 @@ const NurseActions = () => {
           </button>
         </div>
       )}
-      <Table data={nurses} columns={columns} />
+      <Table
+        data={nurses}
+        columns={columns}
+        inputs={[name, address, department]}
+      />
     </div>
   );
 };
