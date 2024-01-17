@@ -5,23 +5,12 @@ import sendBookingConfirmationEmail from "../lib/sendEmail.js";
 
 const router = express.Router();
 
-router.get("/patient/:id", async (req, res) => {
-  const { id } = req.params;
+// gets the list of bookings
+router.get("/", async (req, res) => {
   try {
-    const bookings = await Booking.find({ patient: id }).populate("nurse");
+    const allBookings = await Booking.find({}).populate(["nurse", "patient"]);
 
-    res.status(200).json(bookings);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-router.get("/nurse/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    const bookings = await Booking.find({ nurse: id });
-
-    res.status(200).json(bookings);
+    res.status(200).json(allBookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -69,11 +58,37 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+// get the bookings of this specific patient
+router.get("/patient/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const allBookings = await Booking.find({}).populate(["nurse", "patient"]);
+    const bookings = await Booking.find({ patient: id }).populate("nurse");
 
-    res.status(200).json(allBookings);
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// get the bookings assigned to this specific patient
+router.get("/nurse/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const bookings = await Booking.find({ nurse: id });
+
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// delete the bookings with this specific id
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Booking.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Booking deletion successful !" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

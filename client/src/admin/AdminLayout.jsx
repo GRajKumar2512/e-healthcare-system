@@ -1,6 +1,8 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const AdminLayout = () => {
   const menuItems = [
@@ -12,6 +14,16 @@ const AdminLayout = () => {
     "Calender",
   ];
 
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationFn: async () => {
+      const { data } = await axios.post("/logout");
+      navigate("/register");
+      return data;
+    },
+  });
+
   return (
     <>
       <nav className="flex justify-between px-8 py-4 items-center shadow-lg">
@@ -21,7 +33,10 @@ const AdminLayout = () => {
           </h1>
         </div>
         <div>
-          <button className="px-3 py-1 rounded-lg bg-red-700 text-white">
+          <button
+            className="px-3 py-1 rounded-lg bg-red-700 text-white"
+            onClick={mutate}
+          >
             Log Out
           </button>
         </div>
